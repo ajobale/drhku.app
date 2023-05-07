@@ -19,6 +19,7 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css" />
+    
 
     <title>drhku.app</title>
   </head>
@@ -454,26 +455,33 @@
           <a href="#" class="footer__logo">
             <i class="ri-add-fill"></i> drhku.app
           </a>
-
+         
           <h3 class="footer__title">
             Subscribe to our newsletter <br />
             to stay update
           </h3>
 
+          <!-- <div class="alert alert-succes alert-dismissible fade show d-none" role="alert">
+          Your email already received.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> -->
+
+          <form name="newsletter-drhku.app">
           <div class="footer__subscribe">
             <input
               type="email"
               placeholder="Enter your email"
               class="footer__input"
+              name="email"
             />
-
-            <button class="button button--flex footer__button">
+            <button type="submit" class="button button--flex footer__button">
               Subscribe
               <i class="ri-arrow-right-up-line button__icon"></i>
             </button>
+
           </div>
         </div>
-
+      </form>
         <div class="footer__content">
           <h3 class="footer__title">Our Address</h3>
 
@@ -529,5 +537,18 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
+
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxfHaAvoy-qDicBmL8938OcB2oCW-CLk7RiY36i0WexDH38wYLGQZZYCbBH5Omj4pv2uQ/exec'
+      const form = document.forms['newsletter-drhku.app']
+
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {form.reset(); console.log('Success!', response); })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
   </body>
 </html>
